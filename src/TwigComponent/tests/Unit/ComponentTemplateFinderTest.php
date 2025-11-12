@@ -117,6 +117,7 @@ final class ComponentTemplateFinderTest extends TestCase
             'foo/bar.html.twig',
             'bar/foo/bar.html.twig',
             'foo/foo/bar.html.twig',
+            'foo/baz/baz.html.twig',
         ];
         $loader = $this->createLoader($templates);
         $finder = new ComponentTemplateFinder($loader, 'foo');
@@ -124,6 +125,8 @@ final class ComponentTemplateFinderTest extends TestCase
         $this->assertEquals('foo/bar.html.twig', $finder->findAnonymousComponentTemplate('bar'));
         $this->assertEquals('foo/foo/bar.html.twig', $finder->findAnonymousComponentTemplate('foo:bar'));
         $this->assertEquals('foo/foo/bar.html.twig', $finder->findAnonymousComponentTemplate('foo:bar'));
+        $this->assertEquals('foo/baz/baz.html.twig', $finder->findAnonymousComponentTemplate('baz'));
+        $this->assertEquals('foo/baz/baz.html.twig', $finder->findAnonymousComponentTemplate('baz:baz'));
     }
 
     private function createLoader(array $templates): LoaderInterface

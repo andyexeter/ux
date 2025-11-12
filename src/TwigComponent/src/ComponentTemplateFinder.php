@@ -66,6 +66,12 @@ final class ComponentTemplateFinder implements ComponentTemplateFinderInterface
             return $template;
         }
 
+        // Resolve e.g. <twig:Accordion> to Accordion/Accordion.html.twig if Accordion.html.twig does not exist
+        $template = rtrim($this->directory, '/').'/'.$componentPath.'/'.$componentPath.'.html.twig';
+        if ($loader->exists($template)) {
+            return $template;
+        }
+
         $parts = explode('/', $componentPath, 2);
         if (\count($parts) < 2) {
             return null;
